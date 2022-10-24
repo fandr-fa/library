@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="content">
+        <div class="title">My Library</div>
+
+        <div class="library">
+            <div>
+                <button id="new-book-button" onclick="expandNewBookSection()">New Book</button>
+            </div>
+            <div id="collapsableDiv">
+                <div class="wrapper">
+                    <div class="new-book">
+                        <div class="new-book-row">
+                            <label for="author" class="label">Author:</label>
+                            <input type="text" name="author" id="author" required>
+                        </div>
+                        <div class="new-book-row">
+                            <label for="title" class="label">Title:</label>
+                            <input type="text" name="title" id="title" required>
+                        </div>
+                        <div class="new-book-row">
+                            <label for="pages" class="label">Pages:</label>
+                            <input type="number" name="pages" id="pages" required>
+                        </div>
+                        <div class="new-book-row">
+                            <label for="read" class="label">Read:</label>
+                            <input type="checkbox" name="read" id="read" required>
+                        </div>
+                        <button id="submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="books">
+                    <table id="books-table">
+                    <thead>
+                        <tr>
+                            <th class="column-author">Author</th>
+                            <th class="column-title">Title</th>
+                            <th class="column-pages">Pages</th>
+                            <th class="column-read">Read</th>
+                            <th class="column-check">---</th>
+                            <th class="column-delete">---</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

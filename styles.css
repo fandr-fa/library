@@ -1,0 +1,81 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: xx-large;
+}
+
+.library {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex-grow: 1;
+}
+
+.new-book {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#new-book-form {
+  display: none;
+}
+
+.new-book-row {
+  display: flex;
+  gap: 15px;
+}
+
+.label {
+  min-width: 75px;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+#collapsableDiv {
+  transition: height .5s;
+  height: 0;
+  overflow: hidden;
+}
+
+.column-title {
+  word-wrap: break-word;
+  min-width: 200px;
+  max-width: 200px;
+}
+
+.column-author {
+  word-wrap: break-word;
+  min-width: 200px;
+  max-width: 200px;
+}
+
+.column-pages {
+  min-width: 50px;
+  max-width: 50px;
+  text-align: center;
+}
+
+.column-read {
+  min-width: 50px;
+  max-width: 50px;
+  text-align: center;
+}
+
+.column-check,
+.column-delete {
+  min-width: 75px;
+  max-width: 75px;
+  text-align: center;
+}
