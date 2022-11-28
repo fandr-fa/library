@@ -1,6 +1,3 @@
-let newBookForm = document.getElementById("new-book-form");
-let newBookButton = document.getElementById("new-book-button");
-
 function clearNewBookForm()
 {
   document.getElementById("author").value = "";
