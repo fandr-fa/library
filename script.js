@@ -23,8 +23,6 @@ function expandNewBookSection()
   }
 }
 
-let myLibrary = [];
-
 class Book {
   constructor(author, title, pages, read) {
     this.author = author;
@@ -32,6 +30,36 @@ class Book {
     this.pages = pages;
     this.read = read;
   }
+}
+
+class Library {
+  books = [];
+
+  addBook(book) {
+    this.books.push(book);
+  }
+
+  removeBook(bookId) {
+    this.books.splice(bookId, 1);
+  }
+
+  changeReadStatus(bookId) {
+    if (this.books[bookId].read === true) {
+      this.books[bookId].read = false;
+    }
+    else {
+      this.books[bookId].read = true;
+    }
+  }
+
+  getReadStatus(bookId) {
+    return this.books[bookId].read;
+  }
+
+  getBookId(title) {
+    return this.books.findIndex((book) => book.title === title);
+  }
+
 }
 
 let submitButton = document.getElementById("submit");
@@ -49,7 +77,7 @@ function submitNewBookToLibrary() {
 
 function addBookToLibrary(book)
 {
-  myLibrary.push(book);
+  library.addBook(book);
   addBookToTable(book);
 }
 
@@ -58,7 +86,7 @@ function addBookToTable(book)
   let table = document.getElementById("books-table").getElementsByTagName('tbody')[0];
 
   let row = table.insertRow(-1);
-  let id = myLibrary.findIndex((element) => element.title === book.title);
+  let id = library.getBookId(book.title);
   row.dataset.id = id;
 
   let cellAuthor = row.insertCell(0);
@@ -89,7 +117,7 @@ function addBookToTable(book)
 function removeBookClick(button)
 {
   let id = button.parentElement.parentElement.dataset.id;
-  myLibrary.splice(id, 1);
+  library.removeBook(id);
 
   let table = document.getElementById("books-table").getElementsByTagName('tbody')[0];
   table.innerHTML = "";
@@ -100,18 +128,20 @@ function removeBookClick(button)
 function changeReadStatus(button)
 {
   let id = button.parentElement.parentElement.dataset.id;
-  if (myLibrary[id].read === true) myLibrary[id].read = false;
-  else myLibrary[id].read = true;
+  library.changeReadStatus(id);
 
-  button.parentElement.parentElement.childNodes[3].innerHTML = myLibrary[id].read;
+
+  button.parentElement.parentElement.childNodes[3].innerHTML = library.getReadStatus(id);
 }
 
 function UpdateTable()
 {
-  myLibrary.forEach(element => {
-    addBookToTable(element);
+  library.books.forEach(book => {
+    addBookToTable(book);
   });
 }
+
+const library = new Library();
 
 addBookToLibrary(new Book("J.K. Rowling", "Harry Potter", 552, true, "Didn't like"));
 addBookToLibrary(new Book("Michael A. Stackpole", "Prince of Havoc", 477, true, "Amazing final"));
