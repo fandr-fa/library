@@ -3,7 +3,7 @@ function clearNewBookForm()
   document.getElementById("author").value = "";
   document.getElementById("title").value = "";
   document.getElementById("pages").value = "";
-  document.getElementById("read").value = "";
+  document.getElementById("read").checked = false;
 }
 
 function expandNewBookSection()
@@ -59,8 +59,8 @@ class Library {
 
 }
 
-let submitButton = document.getElementById("submit");
-submitButton.addEventListener('click', submitNewBookToLibrary);
+document.getElementById("submit").addEventListener('click', submitNewBookToLibrary);
+document.getElementById("new-book-button").addEventListener('click', expandNewBookSection);
 
 function submitNewBookToLibrary() {
   let author = document.getElementById("author").value;
