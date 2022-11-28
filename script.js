@@ -18,6 +18,11 @@ class Library {
 
   tableElement = document.getElementById("books-table").getElementsByTagName('tbody')[0];
 
+  constructor() {
+    document.getElementById("submit").addEventListener('click', this.submitNewBookToLibrary);
+    document.getElementById("new-book-button").addEventListener('click', this.expandNewBookSection);
+  }
+
   expandNewBookSection()
   {
     var collapsableDiv = document.getElementById("collapsableDiv");
@@ -38,6 +43,22 @@ class Library {
     this.titleElement.value = "";
     this.pagesElement.value = "";
     this.readElement.checked = false;
+  }
+
+  submitNewBookToLibrary() {
+    let author = library.authorElement.value;
+    let title = library.titleElement.value;
+    let pages = library.pagesElement.value;
+    let read = library.readElement.checked;
+    let newBook = new Book(author, title, pages, read);
+    library.clearNewBookForm();
+    library.addBook(newBook);
+  }
+
+  addBook(book) {
+    this.books.push(book);
+
+    this.addBookToTable(book);
   }
 
   addBookToTable(book)
@@ -79,6 +100,14 @@ class Library {
     cellDeleteButton.appendChild(newDeleteButton);
   }
 
+  getBookId(title) {
+    return this.books.findIndex((book) => book.title === title);
+  }
+
+  getReadStatus(bookId) {
+    return this.books[bookId].read;
+  }
+
   UpdateTable()
   {
     this.tableElement.innerHTML = "";
@@ -88,38 +117,11 @@ class Library {
     });
   }
 
-  removeBookClick(event)
-  {
-    library.removeBook(event.currentTarget.parentElement.parentElement.dataset.id);
-  }
-
   changeReadStatusClick(event)
   {
     let newReadStatus = library.changeReadStatus(event.currentTarget.parentElement.parentElement.dataset.id);
 
     event.currentTarget.parentElement.parentElement.childNodes[3].innerHTML = newReadStatus;
-  }
-
-  submitNewBookToLibrary() {
-    let author = library.authorElement.value;
-    let title = library.titleElement.value;
-    let pages = library.pagesElement.value;
-    let read = library.readElement.checked;
-    let newBook = new Book(author, title, pages, read);
-    library.clearNewBookForm();
-    library.addBook(newBook);
-  }
-
-  addBook(book) {
-    this.books.push(book);
-
-    this.addBookToTable(book);
-  }
-
-  removeBook(bookId) {
-    this.books.splice(bookId, 1);
-
-    this.UpdateTable();
   }
 
   changeReadStatus(bookId) {
@@ -133,20 +135,20 @@ class Library {
     return this.books[bookId].read;
   }
 
-  getReadStatus(bookId) {
-    return this.books[bookId].read;
+  removeBookClick(event)
+  {
+    library.removeBook(event.currentTarget.parentElement.parentElement.dataset.id);
   }
 
-  getBookId(title) {
-    return this.books.findIndex((book) => book.title === title);
+  removeBook(bookId) {
+    this.books.splice(bookId, 1);
+
+    this.UpdateTable();
   }
 
 }
 
 const library = new Library();
-
-document.getElementById("submit").addEventListener('click', library.submitNewBookToLibrary);
-document.getElementById("new-book-button").addEventListener('click', library.expandNewBookSection);
 
 library.addBook(new Book("J.K. Rowling", "Harry Potter", 552, true, "Didn't like"));
 library.addBook(new Book("Michael A. Stackpole", "Prince of Havoc", 477, true, "Amazing final"));
